@@ -43,9 +43,30 @@ class DayOne:
             return counter
         
     def part2(filepath):
-        return 0
+        dial_val = 50
+        counter = 0
 
-    print(f'Part1 test: {part1(dir/test)}')
-    print(f'Part1 input: {part1(dir/input)}')
+        with open(filepath, 'r') as file:
+            for line in file:
+                rotation = int(line.strip()[1:])
+                if line[0] == 'L': rotation *= -1
+
+                dial_val += rotation
+
+                if dial_val % 100 == 0:
+                    counter += 1
+
+                while dial_val > 99:
+                    dial_val -= 100
+                    counter += 1
+
+                while dial_val < 0:
+                    dial_val += 100
+                    counter += 1
+
+            return counter
+
+    # print(f'Part1 test: {part1(dir/test)}')
+    # print(f'Part1 input: {part1(dir/input)}')
     print(f'Part2 test: {part2(dir/test)}')
     print(f'Part2 input: {part2(dir/input)}')
